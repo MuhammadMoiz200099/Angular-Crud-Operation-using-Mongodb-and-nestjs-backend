@@ -1,0 +1,96 @@
+<div class="dialog-container">
+    <form [formGroup]="formGroup" (ngSubmit)="submit()">
+
+        <mat-card-title>Add New Car</mat-card-title>
+        <br>
+        <mat-form-field class="width-100">
+            <mat-label>Car Name</mat-label>
+            <input type="text" matInput formControlName="name"
+                placeholder="Enter car name">
+             <mat-error *ngIf="formGroup.hasError('name') && !formGroup.hasError('required')">
+                Please enter a name
+            </mat-error>
+            <mat-error *ngIf="formGroup.hasError('required')">
+                Name is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="width-100">
+            <mat-label>Car Brand</mat-label>
+            <input type="text" matInput formControlName="brand"
+                placeholder="Enter car brand">
+             <mat-error *ngIf="formGroup.hasError('brand') && !formGroup.hasError('required')">
+                Please enter a name
+            </mat-error>
+            <mat-error *ngIf="formGroup.hasError('required')">
+                Brand is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="width-100">
+            <mat-label>Car Color</mat-label>
+            <input type="text" matInput formControlName="color"
+                placeholder="Enter car color">
+             <mat-error *ngIf="formGroup.hasError('color') && !formGroup.hasError('required')">
+                Please enter a name
+            </mat-error>
+            <mat-error *ngIf="formGroup.hasError('required')">
+                Color is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="width-100">
+            <mat-label>Car Model</mat-label>
+            <input type="text" matInput formControlName="car_model"
+                placeholder="Enter car model">
+             <mat-error *ngIf="formGroup.hasError('car_model') && !formGroup.hasError('required')">
+                Please enter a name
+            </mat-error>
+            <mat-error *ngIf="formGroup.hasError('required')">
+                Car Model is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+
+
+        <mat-form-field class="width-100">
+            <mat-label>Car released year</mat-label>
+            <input type="text" matInput formControlName="year"
+                placeholder="Enter car released year">
+             <mat-error *ngIf="formGroup.hasError('year') && !formGroup.hasError('required')">
+                Please enter a name
+            </mat-error>
+            <mat-error *ngIf="formGroup.hasError('required')">
+                Released Year is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="width-100">
+            <mat-label>Car released year</mat-label>
+            <input type="text" matInput formControlName="year"
+                placeholder="Enter car released year">
+             <mat-error *ngIf="formGroup.hasError('year') && !formGroup.hasError('required')">
+                Please enter a name
+            </mat-error>
+            <mat-error *ngIf="formGroup.hasError('required')">
+                Released Year is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="width-100">
+            <mat-label>Condition</mat-label>
+            <mat-select formControlName="condition">
+              <mat-option *ngFor="let cond of conditions" [value]="cond.value">{{ cond.name }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+        <div mat-dialog-actions fxLayout="row" fxLayoutAlign="flex-end">
+            <button type="button" mat-button [mat-dialog-close]="false">CANCEL</button>
+            <button type="submit" mat-raised-button color="primary" [mat-dialog-close]="true">
+                <mat-icon *ngIf="isReqPending">
+                    <i class="fa fa-spin fa-spinner"></i>
+                </mat-icon>
+                ADD Record
+            </button>
+        </div>
+    </form>
+</div>

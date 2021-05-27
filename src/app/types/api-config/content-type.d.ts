@@ -1,0 +1,1 @@
+export type ContentType = 'application/x-www-form-urlencoded' | 'application/zip' | 'application/json';
