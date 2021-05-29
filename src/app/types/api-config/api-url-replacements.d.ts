@@ -1,3 +1,3 @@
-export interface CarDeleteURLReplacementParams {
-    car_id: number;
+export interface CarURLReplacementParams {
+    car_id: string;
 }

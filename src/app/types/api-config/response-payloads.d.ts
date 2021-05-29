@@ -7,11 +7,16 @@ export interface CarDataResponsePayload {
         limit: number;
         total_size: number;
     };
-    message: number;
+    message: string;
 }
 
 export interface CarDeleteResponsePayload {
     deletedCount: number;
     n: number;
     ok: number;
+}
+
+export interface CarOperationResponsePayload {
+    data: ICar;
+    message: string;
 }

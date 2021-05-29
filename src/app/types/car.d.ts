@@ -1,9 +1,9 @@
 export interface ICar {
-    id: string;
+    _id?: string;
     name: string;
     brand: string;
     color: string;
-    car_model: string;
+    carModel: string;
     year: string;
     isUsed: boolean;   
 }

@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { SERVER_APIS } from '@app-constants/api-config/api-declaration.constants';
-import { CarDeleteURLReplacementParams } from '@app-types/api-config/api-url-replacements';
+import { CarURLReplacementParams } from '@app-types/api-config/api-url-replacements';
 import { UrlQueryParams } from '@app-types/api-config/query-parameters';
-import { CarDataResponsePayload, CarDeleteResponsePayload } from '@app-types/api-config/response-payloads';
+import { CarDataResponsePayload, CarDeleteResponsePayload, CarOperationResponsePayload } from '@app-types/api-config/response-payloads';
+import { ICar } from '@app-types/car';
 import { Observable } from 'rxjs';
 import { ServerDataService } from './server-data.service';
 
@@ -33,15 +34,49 @@ export class ApiService {
     );
   }
 
-  public deleteCarByID(id: number): Observable<CarDeleteResponsePayload> {
-    const apiConfig = SERVER_APIS.delete_car_by_id;
-
-    const urlParams: CarDeleteURLReplacementParams = {
+  public getCarByID(id: string): Observable<CarOperationResponsePayload> {
+    const apiConfig = SERVER_APIS.get_car_by_id;
+    
+    const urlParams: CarURLReplacementParams = {
       car_id: id
     }
 
-    return this.servcerService.apiCall<CarDeleteResponsePayload, void, CarDeleteURLReplacementParams>(apiConfig, undefined, urlParams, true)
+    return this.servcerService.apiCall<CarOperationResponsePayload, void, CarURLReplacementParams>(
+      apiConfig, undefined, urlParams, true, 
+    );
+  }
 
+  public insertCar(requestPayload: ICar): Observable<CarOperationResponsePayload> {
+    const apiConfig = SERVER_APIS.insert_new_car;
+    
+
+    return this.servcerService.apiCall<CarOperationResponsePayload, ICar, void>(
+      apiConfig, requestPayload, undefined, true, 
+    );
+  }
+
+  public updateCarById(id: string, requestPayload: ICar): Observable<CarOperationResponsePayload> {
+    const apiConfig = SERVER_APIS.update_car_by_id;
+    
+    const urlParams: CarURLReplacementParams = {
+      car_id: id
+    }
+
+    return this.servcerService.apiCall<CarOperationResponsePayload, ICar, CarURLReplacementParams>(
+      apiConfig, requestPayload, urlParams, true, 
+    );
+  }
+
+  public deleteCarByID(id: string): Observable<CarDeleteResponsePayload> {
+    const apiConfig = SERVER_APIS.delete_car_by_id;
+
+    const urlParams: CarURLReplacementParams = {
+      car_id: id
+    }
+
+    return this.servcerService.apiCall<CarDeleteResponsePayload, void, CarURLReplacementParams>(
+      apiConfig, undefined, urlParams, true
+    );
   }
 
 }

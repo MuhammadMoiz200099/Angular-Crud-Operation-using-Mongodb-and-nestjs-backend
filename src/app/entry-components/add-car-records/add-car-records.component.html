@@ -1,95 +1,72 @@
 <div class="dialog-container">
-    <form [formGroup]="formGroup" (ngSubmit)="submit()">
+    <form [formGroup]="carsForm" (ngSubmit)="submit()">
 
         <mat-card-title>Add New Car</mat-card-title>
         <br>
-        <mat-form-field class="width-100">
+        <mat-form-field class="width-100 margin-top-30">
             <mat-label>Car Name</mat-label>
-            <input type="text" matInput formControlName="name"
-                placeholder="Enter car name">
-             <mat-error *ngIf="formGroup.hasError('name') && !formGroup.hasError('required')">
-                Please enter a name
-            </mat-error>
-            <mat-error *ngIf="formGroup.hasError('required')">
-                Name is <strong>required</strong>
+            <input type="text" matInput formControlName="name" placeholder="Enter car name" required>
+            <mat-error *ngIf="carsForm.controls['name'].hasError('required')">
+                Car Name is <strong>required</strong>
             </mat-error>
         </mat-form-field>
 
-        <mat-form-field class="width-100">
+        <mat-form-field class="width-100 margin-top-30">
             <mat-label>Car Brand</mat-label>
-            <input type="text" matInput formControlName="brand"
-                placeholder="Enter car brand">
-             <mat-error *ngIf="formGroup.hasError('brand') && !formGroup.hasError('required')">
-                Please enter a name
-            </mat-error>
-            <mat-error *ngIf="formGroup.hasError('required')">
-                Brand is <strong>required</strong>
+            <input type="text" matInput formControlName="brand" placeholder="Enter car brand" required>
+            <mat-error *ngIf="carsForm.controls['brand'].hasError('required')">
+                Car Brand is <strong>required</strong>
             </mat-error>
         </mat-form-field>
 
-        <mat-form-field class="width-100">
+        <mat-form-field class="width-100 margin-top-30">
             <mat-label>Car Color</mat-label>
-            <input type="text" matInput formControlName="color"
-                placeholder="Enter car color">
-             <mat-error *ngIf="formGroup.hasError('color') && !formGroup.hasError('required')">
-                Please enter a name
-            </mat-error>
-            <mat-error *ngIf="formGroup.hasError('required')">
-                Color is <strong>required</strong>
+            <input type="text" matInput formControlName="color" placeholder="Enter car color" required>
+            <mat-error *ngIf="carsForm.controls['color'].hasError('required')">
+                Car Color is <strong>required</strong>
             </mat-error>
         </mat-form-field>
 
-        <mat-form-field class="width-100">
+        <mat-form-field class="width-100 margin-top-30">
             <mat-label>Car Model</mat-label>
-            <input type="text" matInput formControlName="car_model"
-                placeholder="Enter car model">
-             <mat-error *ngIf="formGroup.hasError('car_model') && !formGroup.hasError('required')">
-                Please enter a name
-            </mat-error>
-            <mat-error *ngIf="formGroup.hasError('required')">
+            <input type="text" matInput formControlName="carModel" placeholder="Enter car model" required>
+            <mat-error *ngIf="carsForm.controls['carModel'].hasError('required')">
                 Car Model is <strong>required</strong>
             </mat-error>
         </mat-form-field>
 
 
-        <mat-form-field class="width-100">
+        <mat-form-field class="width-100 margin-top-30">
             <mat-label>Car released year</mat-label>
-            <input type="text" matInput formControlName="year"
-                placeholder="Enter car released year">
-             <mat-error *ngIf="formGroup.hasError('year') && !formGroup.hasError('required')">
-                Please enter a name
-            </mat-error>
-            <mat-error *ngIf="formGroup.hasError('required')">
-                Released Year is <strong>required</strong>
+            <input type="text" matInput formControlName="year" placeholder="Enter car released year" required>
+            <mat-error *ngIf="carsForm.controls['name'].hasError('required')">
+                Car Released Year is <strong>required</strong>
             </mat-error>
         </mat-form-field>
 
-        <mat-form-field class="width-100">
-            <mat-label>Car released year</mat-label>
-            <input type="text" matInput formControlName="year"
-                placeholder="Enter car released year">
-             <mat-error *ngIf="formGroup.hasError('year') && !formGroup.hasError('required')">
-                Please enter a name
-            </mat-error>
-            <mat-error *ngIf="formGroup.hasError('required')">
-                Released Year is <strong>required</strong>
-            </mat-error>
-        </mat-form-field>
-
-        <mat-form-field class="width-100">
+        <mat-form-field class="width-100 margin-top-30">
             <mat-label>Condition</mat-label>
-            <mat-select formControlName="condition">
-              <mat-option *ngFor="let cond of conditions" [value]="cond.value">{{ cond.name }}</mat-option>
+            <mat-select formControlName="isUsed" required>
+                <mat-option *ngFor="let cond of conditions" [value]="cond.value">{{ cond.name }}</mat-option>
             </mat-select>
-          </mat-form-field>
+            <mat-error *ngIf="carsForm.controls['isUsed'].hasError('required')">
+                Car Released Year is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
 
-        <div mat-dialog-actions fxLayout="row" fxLayoutAlign="flex-end">
+        <div mat-dialog-actions class="actions">
             <button type="button" mat-button [mat-dialog-close]="false">CANCEL</button>
-            <button type="submit" mat-raised-button color="primary" [mat-dialog-close]="true">
+            <button *ngIf="!isEditView" type="submit" mat-raised-button color="primary">
                 <mat-icon *ngIf="isReqPending">
                     <i class="fa fa-spin fa-spinner"></i>
                 </mat-icon>
                 ADD Record
+            </button>
+            <button *ngIf="isEditView" type="submit" mat-raised-button color="primary">
+                <mat-icon *ngIf="isReqPending">
+                    <i class="fa fa-spin fa-spinner"></i>
+                </mat-icon>
+                Update Record
             </button>
         </div>
     </form>

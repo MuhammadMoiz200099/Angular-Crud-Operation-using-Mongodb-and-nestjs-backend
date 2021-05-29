@@ -63,7 +63,7 @@ export class CarTableComponent implements OnInit {
     this.intiUIData();
   }
 
-  public deleteCarRecord(id: number) {
+  public deleteCarRecord(id: string) {
     this.apiService.deleteCarByID(id).subscribe(() => {
       this.matSnackBar.open('Record Deleted Successfully', 'SUCCESS', { duration: 3000 });
       this.intiUIData();
@@ -73,12 +73,26 @@ export class CarTableComponent implements OnInit {
     })
   }
 
-  public addNewRecord() {
+  public openAddDialog() {
     this.matDialog.open<AddCarRecordsComponent>(AddCarRecordsComponent, {
       width: '600px'
     })
     .afterClosed().subscribe((result) => {
-      console.log(result);
+      if(result) {
+        this.intiUIData();
+      }
+    })
+  }
+
+  public openEditDialog(data: ICar) {
+    this.matDialog.open<AddCarRecordsComponent>(AddCarRecordsComponent, {
+      width: '600px',
+      data
+    })
+    .afterClosed().subscribe((result) => {
+      if(result) {
+        this.intiUIData();
+      }
     })
   }
 

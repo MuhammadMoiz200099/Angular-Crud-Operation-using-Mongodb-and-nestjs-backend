@@ -2,7 +2,7 @@
     <mat-card>
         <div class="header-bar">
             <mat-card-title>Car's Data Table</mat-card-title>
-            <button mat-raised-button color="primary" (click)="addNewRecord()">
+            <button mat-raised-button color="primary" (click)="openAddDialog()">
                 <mat-icon>add</mat-icon>
                 <span>Add Record</span>
             </button>
@@ -33,7 +33,7 @@
 
                         <ng-container matColumnDef="model">
                             <th mat-header-cell *matHeaderCellDef>Car Model</th>
-                            <td mat-cell *matCellDef="let row"> {{ row.car_model }} </td>
+                            <td mat-cell *matCellDef="let row"> {{ row.carModel }} </td>
                         </ng-container>
 
                         <ng-container matColumnDef="year">
@@ -57,7 +57,7 @@
                                         <mat-icon>delete</mat-icon>
                                         <span>Delete</span>
                                     </button>
-                                    <button mat-menu-item>
+                                    <button mat-menu-item (click)="openEditDialog(row)">
                                         <mat-icon>edit</mat-icon>
                                         <span>Edit</span>
                                     </button>
@@ -70,7 +70,7 @@
                     </table>
                 </div>
 
-                <mat-paginator [length]="resultsLength" [pageSize]="10" (page)="onPageChange($event)"></mat-paginator>
+                <mat-paginator [length]="resultsLength" [showFirstLastButtons]="true" [pageSize]="10" (page)="onPageChange($event)"></mat-paginator>
             </div>
 
             <div *ngIf="isViewPending">
